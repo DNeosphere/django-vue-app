@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'project_API.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'reto5DB',
+        'NAME': 'imc_db',
         'USER': 'dani-admin',
         'PASSWORD': 'dani*123',
         'HOST': 'localhost',
