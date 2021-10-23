@@ -13,3 +13,8 @@ class IMC(models.Model):
   email=models.EmailField(max_length=100)
   weight=models.PositiveIntegerField()
   height=models.DecimalField(max_digits=5, decimal_places=2)
+
+class Pets(models.Model):
+  name=models.CharField(max_length=50)
+  owner_name=models.CharField(max_length=50)
+  is_vaccinated=models.BooleanField()

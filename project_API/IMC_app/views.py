@@ -6,6 +6,8 @@ import json
 
 from .models import Company
 from .models import IMC
+from .models import Pets
+
 
 # Create your views here.
 class CompanyView(View):
@@ -88,6 +90,57 @@ class IMCView(View):
       weight = imc_json_data['weight'],
       height = imc_json_data['height']
     )
+
+    response_data = {
+      "message": "success"
+    }
+
+    return JsonResponse(response_data)
+
+  def put(self, request):
+    pass
+
+  def delete(self, request):
+    pass
+
+class PetsView(View):
+
+  @method_decorator(csrf_exempt)
+  def dispatch(self, request, *args, **kwargs):
+      return super().dispatch(request, *args, **kwargs)
+
+  def get(self, request):
+    pets = list(Pets.objects.values())
+    print(pets)
+
+    if len(pets) > 0:
+      data={
+        'message':'Success',
+        'pets':pets
+      }
+    else:
+      data = {
+        'message': 'Pets not found'
+      }
+
+    return JsonResponse(data)
+
+
+  def post(self, request):
+
+    json_data = json.loads(request.body)
+    print(json_data)
+
+    try:
+      Pets.objects.create(
+        name = json_data['nombre'],
+        owner_name = json_data['owner_name'],
+        is_vaccinated = json_data['is_vaccinated']
+      )
+    except:
+      response_data = {
+      "message": "Something went wrong"
+    }
 
     response_data = {
       "message": "success"
